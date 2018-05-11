@@ -1,0 +1,56 @@
+---
+title: "Courseramap"
+author: "Victoria Landaberry"
+date: "11 may 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+
+## Uruguay
+It´s a small country in South America. 
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(leaflet)
+leaflet() %>%
+  addTiles() %>%
+  addRectangles(lat1 = -30, lng1 = -53, 
+                lat2 = -35, lng2 = -58)
+
+
+```
+
+
+
+The Capital and the Larger city is Montevideo. 
+In the next map you can see the main touristic place to visit in Uruguay. 
+When clicking on the city you access to the wikipedia link. 
+
+```{r, echo=FALSE ,message=FALSE, warning=FALSE}
+
+df<-data.frame(names=c("Montevideo","Colonia del Sacramento","Punta del Este", "La paloma", "Punta del diablo"), latitude=c(-34.8302,-34.4701,-34.9631,-34.6648,-34.042339), longitude=c(-56.2033,-57.8424,-54.9435,-54.1568,-53.547332),col=c("red","red","blue","blue","blue"),stringsAsFactors = FALSE)
+
+cities<-c( 
+"<a href='https://en.wikipedia.org/wiki/Montevideo'> Montevideo </a>",
+ "<a href='https://en.wikipedia.org/wiki/Colonia_del_Sacramento'> Colonia del Sacramento</a>",
+ "<a href=' https://en.wikipedia.org/wiki/Punta_del_Este'> Punta del Este </a>",
+ "<a href='https://en.wikipedia.org/wiki/La_Paloma,_Rocha'>La paloma </a>",
+ "<a href=' https://en.wikipedia.org/wiki/Punta_del_Diablo'> Punta del diablo  </a>")
+
+df %>%
+  leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(color = df$col) %>%
+addMarkers(popup=cities)%>%        
+  addLegend(labels = c("Historic","Beach"), colors = c("red", "blue"))
+
+
+
+```
+
